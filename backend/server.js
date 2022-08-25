@@ -10,12 +10,15 @@ connectDB() // DB config
 const app = express(); // Initialize Express
 
 const goalRoutes = require("./routes/goalRoutes"); // GoalRoutes import
+const userRoutes = require("./routes/userRoutes"); // UserRoutes import
 
 // Express middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Web Route
 app.use("/api/goals", goalRoutes);
+app.use("/api/users", userRoutes);
 
 // custom error handle middleware
 app.use(errorHandler);
