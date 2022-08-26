@@ -13,7 +13,7 @@ const app = express(); // Initialize Express
 const goalRoutes = require("./routes/goalRoutes"); // GoalRoutes import
 const userRoutes = require("./routes/userRoutes"); // UserRoutes import
 
-app.use(cors());
+app.use(cors()); // cors middleware
 
 // Express middleware
 app.use(express.json());
