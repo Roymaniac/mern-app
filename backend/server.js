@@ -4,6 +4,7 @@ const dotenv = require("dotenv").config(); // Environment variable
 const { errorHandler } = require("./middleware/errorMiddleware");
 const connectDB  = require("./config/db")
 const PORT = process.env.PORT || 5000; // PORT
+const cors = require("cors");
 
 connectDB() // DB config
 
@@ -11,6 +12,8 @@ const app = express(); // Initialize Express
 
 const goalRoutes = require("./routes/goalRoutes"); // GoalRoutes import
 const userRoutes = require("./routes/userRoutes"); // UserRoutes import
+
+app.use(cors());
 
 // Express middleware
 app.use(express.json());
