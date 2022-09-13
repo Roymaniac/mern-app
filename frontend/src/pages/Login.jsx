@@ -1,97 +1,103 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { login, reset } from "../features/auth/authSlice";
-import { FaSignInAlt } from "react-icons/fa";
-import Spinner from "../components/Spinner";
+import { useState, useEffect } from 'react'
+import { FaSignInAlt } from 'react-icons/fa'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { login, reset } from '../features/auth/authSlice'
+import Spinner from '../components/Spinner'
 
 function Login() {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+    email: '',
+    password: '',
+  })
 
-  const { email, password } = formData;
+  const { email, password } = formData
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
-  );
+  )
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      toast.error(message)
     }
+
     if (isSuccess || user) {
-      navigate("/");
+      navigate('/')
     }
 
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value,
-    }));
-  };
+      [e.target.name]: e.target.value,
+    }))
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const userData = { email, password };
+  const onSubmit = (e) => {
+    e.preventDefault()
 
-    dispatch(login(userData));
-  };
+    const userData = {
+      email,
+      password,
+    }
 
-  // Loader effect
+    dispatch(login(userData))
+  }
+
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner />
   }
 
   return (
     <>
-      <section className="heading">
-        <h3>
+      <section className='heading'>
+        <h1>
           <FaSignInAlt /> Login
-        </h3>
-        <p>Sign into your account</p>
+        </h1>
+        <p>Login and start setting goals</p>
       </section>
 
-      <section className="form">
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
+      <section className='form'>
+        <form onSubmit={onSubmit}>
+          <div className='form-group'>
             <input
-              type="text"
-              className="form-control"
-              id="email"
-              name="email"
-              placeholder="Enter a valid email address"
+              type='email'
+              className='form-control'
+              id='email'
+              name='email'
               value={email}
-              onChange={handleChange}
+              placeholder='Enter your email'
+              onChange={onChange}
             />
           </div>
-          <div className="form-group">
+          <div className='form-group'>
             <input
-              type="text"
-              className="form-control"
-              id="password"
-              name="password"
-              placeholder="Enter your password"
+              type='password'
+              className='form-control'
+              id='password'
+              name='password'
               value={password}
-              onChange={handleChange}
+              placeholder='Enter password'
+              onChange={onChange}
             />
           </div>
-          <div className="form-control">
-            <button className="btn btn-block">Login</button>
+
+          <div className='form-group'>
+            <button type='submit' className='btn btn-block'>
+              Submit
+            </button>
           </div>
         </form>
       </section>
     </>
-  );
+  )
 }
 
-export default Login;
+export default Login
