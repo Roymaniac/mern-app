@@ -57,11 +57,7 @@ function Register() {
 
   // loader effect
   if (isLoading) {
-    return (
-      <div>
-        <Spinner />
-      </div>
-    );
+    return <Spinner />;
   }
 
   return (

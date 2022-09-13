@@ -1,45 +1,38 @@
-import axios from "axios";
+import axios from 'axios'
 
-// Backend user route
-const API_URL = "/api/users/";
+const API_URL = process.env.REACT_APP_SERVER_URL +  'users/'
 
-// Register users
+// Register user
 const register = async (userData) => {
-  // fetch user data
-  const response = await axios.post(API_URL + "register", userData);
+  const response = await axios.post(API_URL, userData)
 
   if (response.data) {
-    // store value on local storage
-    localStorage.setItem("user", JSON.stringify(response.data));
+    localStorage.setItem('user', JSON.stringify(response.data))
   }
 
-  // return the data
-  return response.data;
-};
+  return response.data
+}
 
-// Log User In
+// Login user
 const login = async (userData) => {
-  // fetch use data
-  const response = await axios.post(API_URL + "login", userData);
+  const response = await axios.post(API_URL + 'login', userData)
 
   if (response.data) {
-    // store value on local localStorage
-    localStorage.setItem("user", JSON.stringify(response.data));
+    localStorage.setItem('user', JSON.stringify(response.data))
   }
 
-  // return data
-  return response.data;
-};
+  return response.data
+}
 
-// Log user out
-const logout = async () => {
-  localStorage.removeItem("user");
-};
+// Logout user
+const logout = () => {
+  localStorage.removeItem('user')
+}
 
 const authService = {
   register,
-  login,
   logout,
-};
+  login,
+}
 
-export default authService;
+export default authService

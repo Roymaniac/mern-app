@@ -49,11 +49,7 @@ function Login() {
 
   // Loader effect
   if (isLoading) {
-    return (
-      <div>
-        <Spinner />
-      </div>
-    );
+    return <Spinner />;
   }
 
   return (
