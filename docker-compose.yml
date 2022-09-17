@@ -2,14 +2,14 @@ version: "3.9"
 
 services:
   frontend:
-    build: client
-    container_name: client
+    build: frontend
+    container_name: frontend 
     restart: always
     ports:
       - 3000:3000
     stdin_open: true
     volumes:
-      - ./client:/app
+      - ./frontend:/app
       - /app/node_modules
     networks:
       - react-express
@@ -17,13 +17,13 @@ services:
       - backend
 
   backend:
-    build: server
-    container_name: server
+    build: backend 
+    container_name: backend 
     restart: always
     ports:
       - 5000:5000
     volumes:
-      - ./server:/app
+      - ./backend:/app
       - /app/node_modules
     depends_on:
       - mongo
