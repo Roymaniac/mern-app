@@ -1,11 +1,15 @@
 FROM node:18-slim
 
-WORKDIR /app
+ENV NODE_ENV = production
 
-COPY package.json /app/package.json
-COPY package-lock.json /app/package-lock.json
+WORKDIR "/app"
 
-COPY . /app
+COPY package.json ./
+COPY package-lock.json ./
+
+RUN npm install
+
+COPY . .
 
 EXPOSE 5000
 
