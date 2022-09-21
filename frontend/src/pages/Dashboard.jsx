@@ -16,7 +16,7 @@ function Dashboard() {
     (state) => state.goals
   );
 
-  const { data } = goals
+  const { data } = goals;
 
   // console.log(data.map(goal => goal._id));
 
@@ -27,13 +27,13 @@ function Dashboard() {
 
     if (!user) {
       navigate("/login");
-    } else {
-      dispatch(getGoals());
     }
 
-    if (!isError) {
+    dispatch(getGoals());
+
+    return () => {
       dispatch(reset());
-    }
+    };
   }, [user, navigate, isError, message, dispatch]);
 
   if (isLoading) {
